@@ -1,0 +1,52 @@
+﻿@model AllProductsQueryModel
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<form method="get">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="form-group">
+                <label asp-for="SearchTerm"></label>
+                <input asp-for="SearchTerm" class="form-control" placeholder="Search by product name..." />
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (!Model.Products.Any())
+{
+    <h2 class="text-center">No products found!</h2>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="card w-25 mb-1">
+                <div class="card-body">
+                    <h5 class="card-title">@product.ProductName</h5>
+                    <p class="card-text">@product.UnitPrice.ToString() lv. / @product.MeasurementUnit.ToString()</p>
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+                    <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-warning">Edit</a>
+                    <a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    var lastPage = Math.Ceiling((double)Model.TotalProducts / AllProductsQueryModel.ProductsPerPage);
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-primary mt-4 @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+           asp-controller="Products" asp-action="All" asp-route-currentPage="@(Model.CurrentPage - 1)">Previous Page</a>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-primary float-right offset-10 mt-4 @(Model.CurrentPage == lastPage ? "disabled" : string.Empty)"
+           asp-controller="Products" asp-action="All" asp-route-currentPage="@(Model.CurrentPage + 1)">Next Page</a>
+        </div>
+    </div>
+}

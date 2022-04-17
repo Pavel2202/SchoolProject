@@ -1,0 +1,29 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = @Model.ProductName;
+}
+
+<div class="row">
+    <div class="col-md-6 offset-4">
+        <h2>@Model.ProductName</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h5>Quantity: @Model.Quantity @Model.MeasurementUnit.ToString()</h5>       
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h5>Price: @Model.UnitPrice.ToString() lv. / @Model.MeasurementUnit.ToString()</h5>       
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h5>The product will be delivered on @Model.DateOfDelivery by @Model.Supplier</h5>       
+    </div>
+</div>

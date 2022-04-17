@@ -1,0 +1,40 @@
+﻿@model ProductFormModel
+
+<form method="post">
+  <div class="form-group">
+    <label asp-for="ProductName">Product Name</label>
+    <input asp-for="ProductName" class="form-control" placeholder="Product name here...">
+    <span asp-validation-for="ProductName" class="small text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="MeasurementUnit">Measurement Unit</label>
+    <select asp-for="MeasurementUnit" class="form-control">
+      @foreach (var unit in Model.MeasurementUnits)
+            {
+                <option value=@unit.ToString()>@unit.ToString()</option>
+            }
+        </select>
+  </div>
+  <div class="form-group">
+    <label asp-for="Quantity">Quantity</label>
+    <input asp-for="Quantity" class="form-control" placeholder="1-100000">
+    <span asp-validation-for="Quantity" class="small text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="UnitPrice">Price per unit</label>
+    <input asp-for="UnitPrice" class="form-control" placeholder="0.20-100000">
+    <span asp-validation-for="UnitPrice" class="small text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Supplier">Supplier</label>
+    <input asp-for="Supplier" class="form-control" placeholder="Supplier name here...">
+    <span asp-validation-for="Supplier" class="small text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="DateOfDelivery">Delivery Date</label>
+    <input asp-for="DateOfDelivery" class="form-control" placeholder="22/02/2022...">
+    <span asp-validation-for="DateOfDelivery" class="small text-danger"></span>
+  </div>
+
+  <input class="btn btn-primary float-right mt-4" type="submit" value="Save"/>
+</form>
